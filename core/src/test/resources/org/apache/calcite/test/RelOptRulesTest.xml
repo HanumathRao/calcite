@@ -8281,9 +8281,9 @@ unnest(t1.fake_col) as t2]]>
         </Resource>
         <Resource name="planBefore">
             <![CDATA[
-LogicalProject(C_NATIONKEY=[$1], FAKE_COL2=[ITEM($2, 'FAKE_COL2')])
-  LogicalCorrelate(correlation=[$cor0], joinType=[inner], requiredColumns=[{0}])
-    LogicalTableScan(table=[[CATALOG, SALES, CUSTOMER]])
+LogicalProject(O_NAME=[$2], FAKE_COL2=[$3])
+  LogicalCorrelate(correlation=[$cor0], joinType=[inner], requiredColumns=[{1}])
+    LogicalTableScan(table=[[CATALOG, SALES, ORDERS]])
     Uncollect
       LogicalProject(FAKE_COL=[$cor0.FAKE_COL])
         LogicalValues(tuples=[[{ 0 }]])
@@ -8291,11 +8291,11 @@ LogicalProject(C_NATIONKEY=[$1], FAKE_COL2=[ITEM($2, 'FAKE_COL2')])
         </Resource>
         <Resource name="planAfter">
             <![CDATA[
-LogicalProject(C_NATIONKEY=[$1], FAKE_COL2=[$2])
+LogicalProject(O_NAME=[$1], FAKE_COL2=[$2])
   LogicalCorrelate(correlation=[$cor0], joinType=[inner], requiredColumns=[{0}])
-    LogicalProject(FAKE_COL=[$0], C_NATIONKEY=[$1])
-      LogicalTableScan(table=[[CATALOG, SALES, CUSTOMER]])
-    LogicalProject(ITEM=[ITEM($0, 'FAKE_COL2')])
+    LogicalProject(FAKE_COL=[$1], O_NAME=[$2])
+      LogicalTableScan(table=[[CATALOG, SALES, ORDERS]])
+    LogicalProject(FAKE_COL=[$0])
       Uncollect
         LogicalProject(FAKE_COL=[$cor0.FAKE_COL])
           LogicalValues(tuples=[[{ 0 }]])

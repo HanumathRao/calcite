@@ -265,19 +265,7 @@ public class PushProjector {
       rightBitmap =
           ImmutableBitSet.range(nFields + nSysFields, nChildFields);
 
-      // Required columns need to be included in project
-      // But when the rowType contains dynamic star, the required column is already included
-      boolean containDynamicStar = false;
-      for (RelDataTypeField field : corrRel.getRowType().getFieldList()) {
-        if (field.isDynamicStar()) {
-          containDynamicStar = true;
-          break;
-        }
-      }
-
-      if (!containDynamicStar) {
-        projRefs.or(BitSets.of(corrRel.getRequiredColumns()));
-      }
+      projRefs.or(BitSets.of(corrRel.getRequiredColumns().asList()));
 
       switch (corrRel.getJoinType()) {
       case INNER:

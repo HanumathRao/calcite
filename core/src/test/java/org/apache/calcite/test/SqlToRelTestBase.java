@@ -124,10 +124,14 @@ public abstract class SqlToRelTestBase {
                 MockTable nationTable = new MockDynamicTable(this, schema.getCatalogName(),
                     schema.getName(), "NATION", false, 100);
                 registerTable(nationTable);
-
-                MockTable customerTable = new MockDynamicTable(this, schema.getCatalogName(),
+                MockDynamicTable customerTable = new MockDynamicTable(this, schema.getCatalogName(),
                     schema.getName(), "CUSTOMER", false, 100);
                 registerTable(customerTable);
+
+                MockDynamicTable ordersTable = new MockDynamicTable(this, schema.getCatalogName(),
+                    schema.getName(), "ORDERS", false, 100);
+                registerTable(ordersTable);
+                ordersTable.getRowType().getField("*", false, false);
 
                 // CREATE TABLE "REGION" - static table with known schema.
                 final RelDataType intType =

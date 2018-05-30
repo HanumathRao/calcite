@@ -1044,14 +1044,14 @@ public class RelOptRulesTest extends RelOptTestBase {
   }
 
   @Test
-  @Ignore public void testProjectCorrelateTransposeDynamic() {
+  public void testProjectCorrelateTransposeDynamic() {
     ProjectCorrelateTransposeRule customPCTrans =
         new ProjectCorrelateTransposeRule(skipItem, RelFactories.LOGICAL_BUILDER);
 
     checkPlanningDynamic(customPCTrans,
-        "select t1.c_nationkey, t2.fake_col2 "
-        + "from SALES.CUSTOMER as t1, "
-        + "unnest(t1.fake_col) as t2");
+        "select t1.O_NAME, t2.fake_col2 "
+        + "from SALES.ORDERS as t1, "
+        + "unnest(t1.fake_col) t2(fake_col2) ");
   }
 
   @Test public void testProjectCorrelateTransposeWithExprCond() {
